@@ -1,0 +1,11 @@
+C:\Users\^^\Desktop\Yakup\ConvictionRPG\ConvictionRPG\ConvictionRPG\obj\Debug\ConvictionRPG.csprojAssemblyReference.cache
+C:\Users\^^\Desktop\Yakup\ConvictionRPG\ConvictionRPG\ConvictionRPG\obj\Debug\ConvictionRPG.csproj.CoreCompileInputs.cache
+C:\Users\^^\Desktop\Yakup\ConvictionRPG\ConvictionRPG\ConvictionRPG\bin\Debug\ConvictionRPG.exe.config
+C:\Users\^^\Desktop\Yakup\ConvictionRPG\ConvictionRPG\ConvictionRPG\bin\Debug\ConvictionRPG.exe
+C:\Users\^^\Desktop\Yakup\ConvictionRPG\ConvictionRPG\ConvictionRPG\bin\Debug\ConvictionRPG.pdb
+C:\Users\^^\Desktop\Yakup\ConvictionRPG\ConvictionRPG\ConvictionRPG\obj\Debug\ConvictionRPG.exe
+C:\Users\^^\Desktop\Yakup\ConvictionRPG\ConvictionRPG\ConvictionRPG\obj\Debug\ConvictionRPG.pdb
+C:\Users\^^\Desktop\ConvictionRPG\ConvictionRPG\ConvictionRPG\obj\Debug\ConvictionRPG.csprojAssemblyReference.cache
+C:\Users\^^\Desktop\ConvictionRPG\ConvictionRPG\ConvictionRPG\obj\Debug\ConvictionRPG.csproj.CoreCompileInputs.cache
+C:\Users\^^\Desktop\ConvictionRPG\ConvictionRPG\ConvictionRPG\obj\Debug\ConvictionRPG.exe
+C:\Users\^^\Desktop\ConvictionRPG\ConvictionRPG\ConvictionRPG\obj\Debug\ConvictionRPG.pdb
