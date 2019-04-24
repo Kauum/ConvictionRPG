@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 /* |+| /_______ ___________ ______ _ ________________________ _ _____ ___   _____ _____  _______________  ______ _\ |-| */
 
@@ -98,7 +99,7 @@ _____________________________________________________________________________
 |                       z?.`.`.`.`.`.`.`.`.`.`.`3).`.`.`.`.`.`.`.`.`.`.`.j'	|
 |                      J'`.`.`.`.`.`.`.`.`.`.`.`?).`.`.`.`.`.`.`.`.`.`.`.3	|
 |                    j"`.`.`.`.`.`.`.`.`.`.`.`.`.h.`.`.`.`.`.`.`.`.`.`.`.3	|
-|                  ,P`.`.`.`.`.`.`.`.`.`.`.`.`.`.$.`.`.`.`.`.`.`.`.`.`.`.3  |        
+|                  ,P`.`.`.`.`.`.`.`.`.`.`.`.`.`.$.`.`.`.`.`.`.`.`.`.`.`.3  |              '                                                 '                      
 _____________________________________________________________________________ */
 
 
@@ -108,7 +109,7 @@ _____________________________________________________________________________ */
 /*.                                                    .								_____________________________
     .$"                                    $o.      $o.  _o"							|		   Knâkles			|
    .o$$o.    .o$o.    .o$o.    .o$o.   .o$$$$$  .o$$$$$ $$P `4$$$$P'   .o$o.			|							|
-  .$$| $$$  $$' $$$  $$' $$$  $$' $$$ $$$| $$$ $$$| $$$ ($o $$$: $$$  $$' $$$			|							|
+  .$$| $$$  $$' $$$  $$' $$$  $$' $$$ $$$| $$$ $$$| $$$ ($o $$$: $$$  $$' $$$			|	 |$|  Game File  |$|    |
   """  """ """  """ """  """ """  """ """  """ """  """  "  """  """ """  """			|							|
 .oOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo.			|							|
   ooo_ ooo ooo. ... ooo. ... ooo.  .. `4ooo.  .`4ooo.   ooo.ooo. ooo ooo.  ..			|							|
@@ -132,40 +133,138 @@ _____________________________________________________________________________ */
 
 namespace ConvictionRPG {
 
-    class Program {
-
-        static void Main(string[] args) {
+    class Game {
 
 /* |+| /_______ ___________ ______ _ ________________________ _ _____ ___   _____ _____  _______________  ______ _\ |-| */
 
-            /* File Object */
+        /*				     		   __________ ____  ______ _ _ ___ __ __ _                          */
 
-            Game game = new Game();
+        /*				         	         |$|   Configuration    |$|		                            */
 
-            //Load Character Logs
+        List<Character> characters = new List<Character>();
 
-            game.initGame();
-
-            //If we've disable it, this (line 35) won't work.
-
-            game.playing = true;
-
-            //Our Active Character.
-
-            game.activeCharacter = 0;
-
-            // Character Logs
-
-            game.fileName = "characters.txt";
-
-            //If the (game.playing == true), run the "game.mainMenu" function.
-
-            while (game.playing == true) { game.initGame(); }
+        public static string newLine = "\n";
 
 /* |+| /_______ ___________ ______ _ ________________________ _ _____ ___   _____ _____  _______________  ______ _\ |-| */
 
+        private int choice;
+        public bool playing { get; set; } = true;
+        public string fileName { get; set; } = "characters.txt";
+        public int activeCharacter;
+        public bool end { get; set; } = false;
+
+/* |+| /_______ ___________ ______ _ ________________________ _ _____ ___   _____ _____  _______________  ______ _\ |-| */
+
+        #region Init Game
+
+        public void initGame() {
+
+            if (File.Exists("characters.txt")) {
+
+                //This line will change to "loadCharacters();".
+
+                System.Console.WriteLine("The file exists.");
+
+                System.Console.ReadKey();
+
+            } else {
+
+                //This line will change to "createNewCharacter();".
+
+                System.Console.WriteLine("File does not exist in the current directory!");
+
+                System.Console.ReadKey();
+            }
         }
+
+        #endregion
+
+        #region Get Playing
+
+        public bool getPlaying()
+        {
+            return this.playing;
+        }
+
+        #endregion
+
+/* |+| /_______ ___________ ______ _ ________________________ _ _____ ___   _____ _____  _______________  ______ _\ |-| */
+
+        #region Create New Character
+
+        public void createNewCharacter()
+        {
+            Console.Write("Enter character name: ");
+            string name = Console.ReadLine();
+
+            for (int i = 0; i < characters.Count; i++)
+            {
+                if (name == characters[i].name)
+                {
+                    i = -1;
+                    Console.Write("Error! Character already exists!");
+                    Console.Write("\nEnter character name: ");
+                    name = Console.ReadLine();
+                }
+            }
+
+            characters.Add(new Character());
+            activeCharacter = characters.Count - 1;
+            characters[activeCharacter].initialize(name);
+        }
+
+        #endregion
+
+        #region Save Character
+
+        public void saveCharacters()
+        {
+            using (StreamWriter writetext = new StreamWriter(fileName))
+            {
+                for (int i = 0; i < characters.Count; i++)
+                {
+                    writetext.WriteLine($"3 {characters[i].getAsString()}");
+                    if (characters[i].getInvAsStringSave() != "")
+                    {
+                        writetext.WriteLine($"{characters[i].getInvAsStringSave()}");
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region Select Character
+
+        public void selectCharacter()
+        {
+            Console.WriteLine("\nSelect character: ");
+
+            for (int i = 0; i < characters.Count; i++)
+            {
+                Console.WriteLine($"Index: {i} = {characters[i].name} Level: {characters[i].level}");
+            }
+
+            do
+            {
+                Console.Write("\nYour choice: ");
+                string strchoice = Console.ReadLine();
+                bool success = Int32.TryParse(strchoice, out choice);
+                if (success && Enumerable.Range(0, characters.Count).Contains(choice))
+                    break;
+                else
+                    Console.Write($"\nFault input. Please enter new choice (0-{characters.Count}): ");
+            }
+            while (true);
+
+            activeCharacter = choice;
+
+            Console.WriteLine($"{characters[activeCharacter].name} was selected!");
+        }
+
+        #endregion
+
+/* |+| /_______ ___________ ______ _ ________________________ _ _____ ___   _____ _____  _______________  ______ _\ |-| */
+
     }
 }
-
-/* |+| /_______ ___________ ______ _ ________________________ _ _____ ___   _____ _____  _______________  ______ _\ |-| */
