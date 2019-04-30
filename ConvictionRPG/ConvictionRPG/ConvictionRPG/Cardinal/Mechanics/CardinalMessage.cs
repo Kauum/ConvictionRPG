@@ -55,8 +55,6 @@ namespace ConvictionRPG
 
             //  System.Console.WindowWidth = 160;
 
-            Greeting();
-
             System.Console.WriteLine(newLine);
 
             foreach (string line in nameArr)
@@ -65,6 +63,11 @@ namespace ConvictionRPG
             }
 
             System.Console.ReadKey();
+
+            Greeting();
+
+            System.Console.ReadKey();
+
         }
 
         public void quitMessage()
@@ -116,7 +119,7 @@ namespace ConvictionRPG
              @"                                                                                  ",
              @"                                                                                  ",
              @"                                                                                  ",
-             @"			  Main Menu														     ",
+             @"			 Menu														             ",
              @"                                                                                  ",
              @"                                                                                  ",
              @"                                                                                  ",

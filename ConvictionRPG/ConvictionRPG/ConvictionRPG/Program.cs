@@ -144,7 +144,7 @@ namespace ConvictionRPG {
 
             //Load Character Logs
 
-            game.initGame();
+            game.loadSlotGame();
 
             //If we've disable it, this (line 35) won't work.
 
@@ -156,11 +156,15 @@ namespace ConvictionRPG {
 
             // Character Logs
 
-            game.fileName = "characters.txt";
+            game.saveSlot1 = "saveSlot1.txt";
+            game.saveSlot2 = "saveSlot2.txt";
+            game.saveSlot3 = "saveSlot3.txt";
+            game.saveSlot4 = "saveSlot4.txt";
+
 
             //If the (game.playing == true), run the "game.mainMenu" function.
 
-            while (game.playing == true) { game.initGame(); }
+            while (game.playing == true) { game.startMenu(); }
 
 /* |+| /_______ ___________ ______ _ ________________________ _ _____ ___   _____ _____  _______________  ______ _\ |-| */
 
